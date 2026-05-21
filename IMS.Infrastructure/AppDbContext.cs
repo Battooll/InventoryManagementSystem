@@ -29,7 +29,16 @@ namespace IMS.Infrastructure
 
             // Apply all Fluent Configurations automatically from this assembly
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
-
+            modelBuilder.Entity<SalesOrderItem>()
+            .HasOne(soi => soi.Product)
+            .WithMany()
+            .HasForeignKey(soi => soi.ProductId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<StockTransferItem>()
+            .HasOne(sti => sti.Product)
+            .WithMany()
+            .HasForeignKey(sti => sti.ProductId)
+            .OnDelete(DeleteBehavior.NoAction);
             // Automatically apply global Soft Delete query filter to all entities deriving from BaseEntity
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
