@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IMS.Application.Services
 {
-    internal class ReportService : IReportService
+    public class ReportService : IReportService
     {
         private readonly IAppDbContext _context;
 
